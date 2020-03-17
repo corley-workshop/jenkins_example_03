@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Obtain date") {
+            steps {
+                script {
+                    echo 'Obtaining date from sh'
+                    def date = sh returnStdout: true, script: "date"
+                    echo "Date: ${date.trim()}"
+                }
+            }
+        }
+
+        stage("List of distro informations") {
+            steps {
+                script {
+                    echo 'Obtaining my distro information'
+                    def informations = sh returnStdout: true, script: "cat /etc/os-release"
+                    informations = informations.split("[\\n]+")
+
+                    for(String information : informations) {
+                        echo "Information: ${information}"
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+

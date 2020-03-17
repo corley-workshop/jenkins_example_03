@@ -1,0 +1,76 @@
+pipeline {
+    agent any
+
+    stages {
+        stage("Sequential Stage 1/2") {
+            steps {
+                echo "1/2 - Start"
+                sleep(time: 4, unit: 'SECONDS')
+                echo "1/2 - Finish"
+            }
+        }
+
+        stage("Sequential Stage 2/2") {
+            steps {
+                echo "2/2 - Start"
+                sleep(time: 5, unit: 'SECONDS')
+                echo "2/2 - Finish"
+            }
+        }
+
+        stage("Parallelized Stages") {
+            parallel {
+                stage("Parallel Stage 1/6") {
+                    steps {
+                        echo '1/6 - Start'
+                        sleep(time: 4, unit: 'SECONDS')
+                        echo '1/6 - Finish'
+                    }
+                }
+
+                stage("Parallel Stage 2/6") {
+                    steps {
+                        echo '2/6 - Start'
+                        sleep(time: 5, unit: 'SECONDS')
+                        echo '2/6 - Finish'
+                    }
+                }
+
+                stage("Parallel Stage 3/6") {
+                    steps {
+                        echo '3/6 - Start'
+                        sleep(time: 1, unit: 'SECONDS')
+                        echo '3/6 - Finish'
+                    }
+                }
+
+                stage("Parallel Stage 4/6") {
+                    steps {
+                        echo '4/6 - Start'
+                        sleep(time: 2, unit: 'SECONDS')
+                        echo '4/6 - Finish'
+                    }
+                }
+
+                stage("Parallel Stage 5/6") {
+                    steps {
+                        echo '5/6 - Start'
+                        sleep(time: 7, unit: 'SECONDS')
+                        echo '5/6 - Finish'
+                    }
+                }
+
+                stage("Parallel Stage 6/6") {
+                    steps {
+                        echo '6/6 - Start'
+                        sleep(time: 3, unit: 'SECONDS')
+                        echo '6/6 - Finish'
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
